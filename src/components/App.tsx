@@ -4,10 +4,9 @@ import { Footer } from './footer';
 import { List, Edit, New } from './pages/kiosk'
 
 import {
-  BrowserRouter as Router,
-  Switch,
   Route,
-  Link
+  Routes,
+  BrowserRouter as Router,
 } from "react-router-dom";
 
 export function App(): ReactElement {
@@ -15,17 +14,11 @@ export function App(): ReactElement {
     <Router>
       <Header />
       <main>
-        <Switch>
-          <Route path="/list">
-            <List />
-          </Route>
-          <Route path="/edit">
-            <Edit />
-          </Route>
-          <Route path="/new">
-            <New />
-          </Route>
-        </Switch>
+        <Routes>
+          <Route path="/" element={<List />} />
+          <Route path="/edit" element={<Edit />} />
+          <Route path="/new" element={<New />} />
+        </Routes>
       </main>
       <Footer />
     </Router>
