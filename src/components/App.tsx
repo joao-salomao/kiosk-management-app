@@ -8,19 +8,24 @@ import {
   Routes,
   BrowserRouter as Router,
 } from "react-router-dom";
+import {
+  RecoilRoot
+} from 'recoil';
 
 export function App(): ReactElement {
   return (
-    <Router>
-      <Header />
-      <main>
-        <Routes>
-          <Route path="/" element={<List />} />
-          <Route path="/edit" element={<Edit />} />
-          <Route path="/new" element={<New />} />
-        </Routes>
-      </main>
-      <Footer />
-    </Router>
+    <RecoilRoot>
+      <Router>
+        <Header />
+        <main className='p-4 m-4'>
+          <Routes>
+            <Route path="/" element={<List />} />
+            <Route path="/edit" element={<Edit />} />
+            <Route path="/new" element={<New />} />
+          </Routes>
+        </main>
+        <Footer />
+      </Router>
+    </RecoilRoot>
   );
 }
