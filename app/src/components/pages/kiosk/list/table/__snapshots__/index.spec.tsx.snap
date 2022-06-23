@@ -1,0 +1,104 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders loader correctly 1`] = `
+<div
+  className="overflow-x-auto shadow-md sm:rounded-lg"
+>
+  <table
+    className="w-full text-sm text-left text-gray-500 text-gray-400"
+  >
+    <thead
+      className="text-xs text-white uppercase bg-gray-50 bg-gray-700 text-gray-400"
+    >
+      <tr>
+        <th
+          className="px-6 py-3"
+          scope="col"
+        >
+          ID
+        </th>
+        <th
+          className="px-6 py-3"
+          scope="col"
+        >
+          Description
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        className="bg-white border-b bg-gray-800 border-gray-700"
+      >
+        <th
+          className="px-6 py-4 text-center"
+          colSpan={2}
+          scope="row"
+        >
+          Carregando
+        </th>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;
+
+exports[`renders the kiosk list correctly 1`] = `
+<div
+  className="overflow-x-auto shadow-md sm:rounded-lg"
+>
+  <table
+    className="w-full text-sm text-left text-gray-500 text-gray-400"
+  >
+    <thead
+      className="text-xs text-white uppercase bg-gray-50 bg-gray-700 text-gray-400"
+    >
+      <tr>
+        <th
+          className="px-6 py-3"
+          scope="col"
+        >
+          ID
+        </th>
+        <th
+          className="px-6 py-3"
+          scope="col"
+        >
+          Description
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        className="bg-white border-b bg-gray-800 border-gray-700"
+      >
+        <th
+          className="px-6 py-4"
+          scope="row"
+        >
+          1
+        </th>
+        <td
+          className="px-6 py-4"
+        >
+          Burguer King
+        </td>
+      </tr>
+      <tr
+        className="bg-white border-b bg-gray-800 border-gray-700"
+      >
+        <th
+          className="px-6 py-4"
+          scope="row"
+        >
+          2
+        </th>
+        <td
+          className="px-6 py-4"
+        >
+          Mac
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;

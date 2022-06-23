@@ -3,6 +3,6 @@ export type Kiosk = {
   serialKey: string;
   description: string;
   isKioskClosed: boolean;
-  storeOpensAt: Date;
-  storeClosesAt: Date;
+  storeOpensAt: string;
+  storeClosesAt: string;
 };
