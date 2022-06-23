@@ -5,9 +5,10 @@ export type TableProps = {
   kiosks: Kiosk[];
   isLoading: boolean;
   onClickNew: () => void
+  onClickDelete: (kioskId: Kiosk['id']) => void
 };
 
-export const Table = ({ kiosks, isLoading, onClickNew }: TableProps): ReactElement => {
+export const Table = ({ kiosks, isLoading, onClickNew, onClickDelete }: TableProps): ReactElement => {
   return (
     <div className="overflow-x-auto shadow-md sm:rounded-lg p-2">
       <button className="float-right bg-gray-500 mb-2 rounded p-1 text-white text-center" onClick={onClickNew}>New Kiosk</button>
@@ -20,12 +21,15 @@ export const Table = ({ kiosks, isLoading, onClickNew }: TableProps): ReactEleme
             <th scope="col" className="px-6 py-3">
               Description
             </th>
+            <th scope="col" className="px-6 py-3">
+              Actions
+            </th>
           </tr>
         </thead>
         <tbody>
           {isLoading && (
             <tr className="bg-white border-b bg-gray-800 border-gray-700">
-              <th colSpan={2} scope="row" className="px-6 py-4 text-center">
+              <th colSpan={3} scope="row" className="px-6 py-4 text-center">
                 Carregando
               </th>
             </tr>
@@ -40,6 +44,9 @@ export const Table = ({ kiosks, isLoading, onClickNew }: TableProps): ReactEleme
                   {item.id}
                 </th>
                 <td className="px-6 py-4">{item.description}</td>
+                <td className="px-6 py-4">
+                  <button className="bg-white rounded p-1" onClick={() => onClickDelete(item.id)}>Delete</button>
+                </td>
               </tr>
             ))}
         </tbody>

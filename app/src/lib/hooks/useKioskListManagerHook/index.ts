@@ -31,7 +31,8 @@ export const useKioskListManagerHook = (): UseKioskListManagerHookReturn => {
   }, []);
 
   const deleteById = useCallback<DeleteByIdHandler>(async (kioskId) => {
-    //
+    await repository.delete(kioskId);
+    setList((list) => list.filter((item) => item.id !== kioskId));
   }, []);
 
   const update = useCallback<UpdateHandler>(async (kioskId, data) => {

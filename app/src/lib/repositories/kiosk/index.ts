@@ -8,4 +8,13 @@ export const repository = {
 
     return await response.json();
   },
+
+  async delete(id: Kiosk["id"]): Promise<void> {
+    const response = await fetch(
+      process.env.REACT_APP_API_BASE_URL + `/kiosks/${id}`,
+      { method: "DELETE" }
+    );
+
+    return response.json();
+  },
 };

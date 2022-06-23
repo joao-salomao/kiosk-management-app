@@ -1,9 +1,9 @@
 import renderer from 'react-test-renderer';
 import { fireEvent, screen, render } from '@testing-library/react';
-import { Table, TableProps } from ".";
+import { Table } from ".";
 
 it('renders the kiosk list correctly', () => {
-  const kiosks: TableProps['kiosks'] = [
+  const kiosks = [
     {
       id: "1",
       serialKey: "NDK-1",
@@ -24,7 +24,7 @@ it('renders the kiosk list correctly', () => {
 
   const tree = renderer
     .create(
-      <Table kiosks={kiosks} isLoading={false} onClickNew={jest.fn()} />
+      <Table kiosks={kiosks} isLoading={false} onClickNew={jest.fn()} onClickDelete={jest.fn()} />
     )
     .toJSON();
 
@@ -36,22 +36,46 @@ it('renders loader correctly', () => {
 
   const tree = renderer
     .create(
-      <Table kiosks={[]} isLoading={true} onClickNew={jest.fn()} />
+      <Table kiosks={[]} isLoading={true} onClickNew={jest.fn()} onClickDelete={jest.fn()} />
     )
     .toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('call the handler on click "New Kiosk" button', () => {
+it('call the handler on click the "New Kiosk" button', () => {
   const onClickNewMock = jest.fn();
 
   render(
-    <Table kiosks={[]} isLoading={false} onClickNew={onClickNewMock} />
+    <Table kiosks={[]} isLoading={false} onClickNew={onClickNewMock} onClickDelete={jest.fn()} />
   );
 
-  const button = screen.getByText('New Kiosk');
+  const button = screen.getByText(/new kiosk/i);
   fireEvent.click(button);
 
   expect(onClickNewMock).toHaveBeenCalled();
-})
+});
+
+it('call the handler on click the "Delete" button', () => {
+  const onClickDeleteMock = jest.fn();
+
+  const kiosks = [
+    {
+      id: "1",
+      serialKey: "NDK-1",
+      description: "Burguer King",
+      isKioskClosed: false,
+      storeOpensAt: "09:00:00",
+      storeClosesAt: "22:00:00"
+    }
+  ]
+
+  render(
+    <Table kiosks={kiosks} isLoading={false} onClickNew={jest.fn()} onClickDelete={onClickDeleteMock} />
+  );
+
+  const button = screen.getByText(/delete/i);
+  fireEvent.click(button);
+
+  expect(onClickDeleteMock).toHaveBeenCalled();
+});
