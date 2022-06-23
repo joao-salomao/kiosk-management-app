@@ -4,11 +4,13 @@ import { ReactElement } from "react";
 export type TableProps = {
   kiosks: Kiosk[];
   isLoading: boolean;
+  onClickNew: () => void
 };
 
-export const Table = ({ kiosks, isLoading }: TableProps): ReactElement => {
+export const Table = ({ kiosks, isLoading, onClickNew }: TableProps): ReactElement => {
   return (
-    <div className="overflow-x-auto shadow-md sm:rounded-lg">
+    <div className="overflow-x-auto shadow-md sm:rounded-lg p-2">
+      <button className="float-right bg-gray-500 mb-2 rounded p-1 text-white text-center" onClick={onClickNew}>New Kiosk</button>
       <table className="w-full text-sm text-left text-gray-500 text-gray-400">
         <thead className="text-xs text-white uppercase bg-gray-50 bg-gray-700 text-gray-400">
           <tr>

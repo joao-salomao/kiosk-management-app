@@ -1,4 +1,5 @@
 import renderer from 'react-test-renderer';
+import { fireEvent, screen, render } from '@testing-library/react';
 import { Table, TableProps } from ".";
 
 it('renders the kiosk list correctly', () => {
@@ -23,7 +24,7 @@ it('renders the kiosk list correctly', () => {
 
   const tree = renderer
     .create(
-      <Table kiosks={kiosks} isLoading={false} />
+      <Table kiosks={kiosks} isLoading={false} onClickNew={jest.fn()} />
     )
     .toJSON();
 
@@ -35,9 +36,22 @@ it('renders loader correctly', () => {
 
   const tree = renderer
     .create(
-      <Table kiosks={[]} isLoading={true} />
+      <Table kiosks={[]} isLoading={true} onClickNew={jest.fn()} />
     )
     .toJSON();
 
   expect(tree).toMatchSnapshot();
 });
+
+it('call the handler on click "New Kiosk" button', () => {
+  const onClickNewMock = jest.fn();
+
+  render(
+    <Table kiosks={[]} isLoading={false} onClickNew={onClickNewMock} />
+  );
+
+  const button = screen.getByText('New Kiosk');
+  fireEvent.click(button);
+
+  expect(onClickNewMock).toHaveBeenCalled();
+})

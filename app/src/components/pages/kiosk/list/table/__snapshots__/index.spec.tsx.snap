@@ -2,8 +2,14 @@
 
 exports[`renders loader correctly 1`] = `
 <div
-  className="overflow-x-auto shadow-md sm:rounded-lg"
+  className="overflow-x-auto shadow-md sm:rounded-lg p-2"
 >
+  <button
+    className="float-right bg-gray-500 mb-2 rounded p-1 text-white text-center"
+    onClick={[MockFunction]}
+  >
+    New Kiosk
+  </button>
   <table
     className="w-full text-sm text-left text-gray-500 text-gray-400"
   >
@@ -44,8 +50,14 @@ exports[`renders loader correctly 1`] = `
 
 exports[`renders the kiosk list correctly 1`] = `
 <div
-  className="overflow-x-auto shadow-md sm:rounded-lg"
+  className="overflow-x-auto shadow-md sm:rounded-lg p-2"
 >
+  <button
+    className="float-right bg-gray-500 mb-2 rounded p-1 text-white text-center"
+    onClick={[MockFunction]}
+  >
+    New Kiosk
+  </button>
   <table
     className="w-full text-sm text-left text-gray-500 text-gray-400"
   >
