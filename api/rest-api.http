@@ -1,0 +1,35 @@
+############# Get all kiosks
+GET http://localhost:3000/kiosks HTTP/1.1
+content-type: application/json
+
+############# Get one kiosk
+GET http://localhost:3000/kiosks/14 HTTP/1.1
+content-type: application/json
+
+############# Create Kiosk
+POST http://localhost:3000/kiosks HTTP/1.1
+content-type: application/json
+
+{
+  "serialKey": "NDK-123",
+  "description": "Burguer King",
+  "isKioskClosed": false,
+  "storeOpensAt": "09:00:00",
+  "storeClosesAt": "22:00:00"
+}
+
+############# Update Kiosk
+PUT http://localhost:3000/kiosks/15 HTTP/1.1
+content-type: application/json
+
+{
+  "serialKey": "NDK-222",
+  "description": "Burguer King",
+  "isKioskClosed": false,
+  "storeOpensAt": "09:00:00",
+  "storeClosesAt": "22:00:00"
+}
+
+############# Delete Kiosk
+DELETE http://localhost:3000/kiosks/15 HTTP/1.1
+content-type: application/json
