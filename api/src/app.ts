@@ -5,7 +5,8 @@ import { KioskController } from "./controllers/KioskController";
 const app = express();
 
 useExpressServer(app, {
+  cors: true,
   controllers: [KioskController],
 });
 
-app.listen(3000, () => console.log("Server running 🚀"));
+app.listen(3001, () => console.log("Server running 🚀"));
