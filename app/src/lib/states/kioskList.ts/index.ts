@@ -1,7 +1,9 @@
 import { atom, selector } from "recoil";
-import { Kiosk, StatusFilterEnum } from "lib/types";
+import { Kiosk } from "lib/types";
 import { statusFilterState } from "lib/states/statusFilter";
 import { searchFilterState } from "lib/states/searchFilter";
+import { applyStatusFilter } from "lib/utils/applyStatusFilter";
+import { applySearchFilter } from "lib/utils/applySearchFilter";
 
 export const kioskListState = atom<Kiosk[]>({
   key: "kioskList",
@@ -13,24 +15,9 @@ export const filteredKioskListState = selector({
   get: ({ get }) => {
     const statusFilter = get(statusFilterState);
     const search = get(searchFilterState);
+    const list = get(kioskListState);
 
-    let list = get(kioskListState);
-
-    if (statusFilter === StatusFilterEnum.closed) {
-      list = list.filter((k) => k.isKioskClosed === true);
-    } else if (statusFilter === StatusFilterEnum.open) {
-      list = list.filter((k) => k.isKioskClosed === false);
-    }
-
-    if (search.length > 0) {
-      list = list.filter(
-        (k) =>
-          k.id.includes(search) ||
-          k.description.includes(search) ||
-          k.serialKey.includes(search)
-      );
-    }
-
-    return list;
+    let filteredList = applyStatusFilter(list, statusFilter);
+    return applySearchFilter(filteredList, search);
   },
 });
