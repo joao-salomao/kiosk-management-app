@@ -1,12 +1,21 @@
 
-import { ReactElement, useCallback, useEffect } from 'react';
+import { ReactElement, useCallback, useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import { useKioskListManagerHook } from 'lib/hooks/useKioskListManagerHook'
+import {
+  useRecoilState,
+  useRecoilValue
+} from 'recoil';
+import { repository } from "lib/repositories/kiosk";
 import { Table, TableProps } from './table'
+import { filteredKioskListState, kioskListState } from 'lib/states/kioskList.ts';
 
 export const List = (): ReactElement => {
   const navigate = useNavigate();
-  const { list, isLoading, statusFilter, setStatusFilter, fetchAll, deleteById } = useKioskListManagerHook();
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [, setKioskList] = useRecoilState(kioskListState);
+  const filteredKioskList = useRecoilValue(filteredKioskListState);
 
   const onClickNewHandle: TableProps['onClickNew'] = useCallback(() => navigate('/new'), [navigate]);
 
@@ -15,26 +24,37 @@ export const List = (): ReactElement => {
 
     if (!result) return;
 
-    deleteById(id);
-  }, [deleteById]);
+    await repository.delete(id);
+
+    setKioskList((list) => list.filter(k => k.id !== id));
+  }, [setKioskList]);
 
   const onclickEditHandle: TableProps['onClickEdit'] = useCallback((id) => {
     navigate(`/edit/${id}`);
   }, [navigate]);
 
+  const fetchAll = useCallback(async () => {
+    setIsLoading(true);
+
+    const kiosks = await repository.all();
+
+    setKioskList(kiosks);
+    setIsLoading(false);
+  }, [setKioskList]);
+
+
   useEffect(() => {
     fetchAll();
-  }, [fetchAll]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Table
-      kiosks={list}
+      kiosks={filteredKioskList}
       isLoading={isLoading}
-      selectedStatusFilter={statusFilter}
       onClickNew={onClickNewHandle}
       onClickEdit={onclickEditHandle}
       onClickDelete={onClickDeleteHandle}
-      setSelectedStatusFilter={setStatusFilter}
     />
   )
 }

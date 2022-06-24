@@ -1,7 +1,6 @@
 import renderer from 'react-test-renderer';
 import { fireEvent, screen, render } from '@testing-library/react';
 import { Table } from ".";
-import { StatusFilter } from 'lib/types';
 
 it('renders the kiosk list correctly', () => {
   const kiosks = [
@@ -26,13 +25,11 @@ it('renders the kiosk list correctly', () => {
   const tree = renderer
     .create(
       <Table
-        selectedStatusFilter={StatusFilter.all}
         kiosks={kiosks}
         isLoading={false}
         onClickNew={jest.fn()}
         onClickEdit={jest.fn()}
         onClickDelete={jest.fn()}
-        setSelectedStatusFilter={jest.fn()}
       />
     )
     .toJSON();
@@ -48,11 +45,9 @@ it('renders loader correctly', () => {
       <Table
         kiosks={[]}
         isLoading={true}
-        selectedStatusFilter={StatusFilter.all}
         onClickNew={jest.fn()}
         onClickEdit={jest.fn()}
         onClickDelete={jest.fn()}
-        setSelectedStatusFilter={jest.fn()}
       />
     )
     .toJSON();
@@ -67,11 +62,10 @@ it('call the handler on click the "New Kiosk" button', () => {
     <Table
       kiosks={[]}
       isLoading={false}
-      selectedStatusFilter={StatusFilter.all}
+
       onClickNew={onClickNewMock}
       onClickEdit={jest.fn()}
       onClickDelete={jest.fn()}
-      setSelectedStatusFilter={jest.fn()}
     />
   );
 
@@ -99,11 +93,9 @@ it('call the handler on click the "Delete" button', () => {
     <Table
       kiosks={kiosks}
       isLoading={false}
-      selectedStatusFilter={StatusFilter.all}
       onClickNew={jest.fn()}
       onClickEdit={jest.fn()}
       onClickDelete={onClickDeleteMock}
-      setSelectedStatusFilter={jest.fn()}
     />
   );
 
@@ -129,11 +121,9 @@ it('call the handler on click the "Edit" button', () => {
     <Table
       kiosks={[kiosk]}
       isLoading={false}
-      selectedStatusFilter={StatusFilter.all}
       onClickNew={jest.fn()}
       onClickEdit={onClickEditMock}
       onClickDelete={jest.fn()}
-      setSelectedStatusFilter={jest.fn()}
     />
   );
 
