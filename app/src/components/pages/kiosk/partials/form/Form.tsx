@@ -45,7 +45,6 @@ export const Form = ({ formData = {}, isSubmitting, onSubmit }: FormProps): Reac
         <input
           type="checkbox"
           className="border border-gray-300"
-          defaultValue="false"
           {...register("isKioskClosed")}
         />
       </div>
