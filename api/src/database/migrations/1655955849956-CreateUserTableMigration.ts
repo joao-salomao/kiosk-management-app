@@ -54,5 +54,7 @@ export class CreateUserTableMigration1655955849956
     );
   }
 
-  public async down(queryRunner: QueryRunner): Promise<void> {}
+  public async down(queryRunner: QueryRunner): Promise<void> {
+    return queryRunner.dropTable("kiosks");
+  }
 }
