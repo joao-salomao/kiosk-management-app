@@ -6,3 +6,9 @@ export type Kiosk = {
   storeOpensAt: string;
   storeClosesAt: string;
 };
+
+export enum StatusFilter {
+  open = "open",
+  closed = "closed",
+  all = "all",
+}

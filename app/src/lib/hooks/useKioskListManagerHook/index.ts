@@ -1,25 +1,37 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useMemo } from "react";
 import { repository } from "lib/repositories/kiosk";
-import { Kiosk } from "lib/types";
+import { Kiosk, StatusFilter } from "lib/types";
 
 type FetchAllHandler = () => Promise<void>;
 type DeleteByIdHandler = (kioskId: Kiosk["id"]) => Promise<void>;
-type UpdateHandler = (
-  kioskId: Kiosk["id"],
-  data: Omit<Kiosk, "id">
-) => Promise<void>;
 
 type UseKioskListManagerHookReturn = {
   list: Kiosk[];
   isLoading: boolean;
+  statusFilter: StatusFilter;
   fetchAll: FetchAllHandler;
   deleteById: DeleteByIdHandler;
-  update: UpdateHandler;
+  setStatusFilter: (status: StatusFilter) => void;
 };
 
 export const useKioskListManagerHook = (): UseKioskListManagerHookReturn => {
-  const [isLoading, setIsLoading] = useState(false);
   const [list, setList] = useState<Kiosk[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [statusFilter, setStatusFilter] = useState<StatusFilter>(
+    StatusFilter.all
+  );
+
+  const filteredList = useMemo(() => {
+    let result = list;
+
+    if (statusFilter === StatusFilter.closed) {
+      result = result.filter((k) => k.isKioskClosed === true);
+    } else if (statusFilter === StatusFilter.open) {
+      result = result.filter((k) => k.isKioskClosed === false);
+    }
+
+    return result;
+  }, [list, statusFilter]);
 
   const fetchAll = useCallback(async () => {
     setIsLoading(true);
@@ -35,15 +47,12 @@ export const useKioskListManagerHook = (): UseKioskListManagerHookReturn => {
     setList((list) => list.filter((item) => item.id !== kioskId));
   }, []);
 
-  const update = useCallback<UpdateHandler>(async (kioskId, data) => {
-    //
-  }, []);
-
   return {
-    list,
+    list: filteredList,
     isLoading,
-    update,
+    statusFilter,
     fetchAll,
     deleteById,
+    setStatusFilter,
   };
 };

@@ -6,7 +6,7 @@ import { Table, TableProps } from './table'
 
 export const List = (): ReactElement => {
   const navigate = useNavigate();
-  const { list, isLoading, fetchAll, deleteById } = useKioskListManagerHook();
+  const { list, isLoading, statusFilter, setStatusFilter, fetchAll, deleteById } = useKioskListManagerHook();
 
   const onClickNewHandle: TableProps['onClickNew'] = useCallback(() => navigate('/new'), [navigate]);
 
@@ -30,9 +30,11 @@ export const List = (): ReactElement => {
     <Table
       kiosks={list}
       isLoading={isLoading}
+      selectedStatusFilter={statusFilter}
       onClickNew={onClickNewHandle}
       onClickEdit={onclickEditHandle}
       onClickDelete={onClickDeleteHandle}
+      setSelectedStatusFilter={setStatusFilter}
     />
   )
 }

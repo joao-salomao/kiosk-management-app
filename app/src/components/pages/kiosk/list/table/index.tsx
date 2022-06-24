@@ -1,19 +1,42 @@
-import { Kiosk } from "lib/types";
 import { ReactElement } from "react";
+import { Kiosk, StatusFilter } from "lib/types";
 import { formatTime } from "lib/utils/formatTime";
 
 export type TableProps = {
   kiosks: Kiosk[];
   isLoading: boolean;
+  selectedStatusFilter: StatusFilter
+  setSelectedStatusFilter: (status: StatusFilter) => void
   onClickNew: () => void
   onClickEdit: (id: Kiosk['id']) => void
   onClickDelete: (kioskId: Kiosk['id']) => void
 };
 
-export const Table = ({ kiosks, isLoading, onClickNew, onClickEdit, onClickDelete }: TableProps): ReactElement => {
+export const Table = (
+  {
+    kiosks,
+    isLoading,
+    selectedStatusFilter,
+    onClickNew,
+    onClickEdit,
+    onClickDelete,
+    setSelectedStatusFilter
+  }: TableProps
+): ReactElement => {
   return (
     <div className="overflow-x-auto shadow-md sm:rounded-lg p-2">
-      <button className="float-right bg-gray-500 mb-2 rounded p-1 text-white text-center" onClick={onClickNew}>New Kiosk</button>
+      <div>
+        <select
+          name="status-filter"
+          value={selectedStatusFilter}
+          onChange={event => setSelectedStatusFilter(event.target.value as StatusFilter)}
+        >
+          <option value={StatusFilter.all}>All</option>
+          <option value={StatusFilter.open}>Opened Kiosks</option>
+          <option value={StatusFilter.closed}>Closed Kiosks</option>
+        </select>
+        <button className="float-right bg-gray-500 mb-2 rounded p-1 text-white text-center" onClick={onClickNew}>New Kiosk</button>
+      </div>
       <table className="w-full text-sm text-left text-gray-500 text-gray-400">
         <thead className="text-xs text-white uppercase bg-gray-50 bg-gray-700 text-gray-400">
           <tr>
