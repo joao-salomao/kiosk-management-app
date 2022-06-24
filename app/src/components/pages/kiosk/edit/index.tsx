@@ -52,6 +52,7 @@ export const Edit = (): ReactElement => {
     {
       !isLoadingKiosk && (
         <Form
+          title={`Edit Kiosk #${kiosk?.id}`}
           formData={kiosk as FormFields}
           isSubmitting={isSubmitting}
           onSubmit={onSubmit}

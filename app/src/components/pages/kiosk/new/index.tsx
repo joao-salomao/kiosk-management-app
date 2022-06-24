@@ -23,6 +23,7 @@ export const New = (): ReactElement => {
 
   return <div>
     <Form
+      title='New Kiosk'
       onSubmit={onSubmit}
       isSubmitting={isSubmitting}
     />

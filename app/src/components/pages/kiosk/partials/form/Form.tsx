@@ -4,6 +4,7 @@ import { Kiosk } from "lib/types";
 
 export type FormFields = Partial<Omit<Kiosk, 'id'>>;
 export type FormProps = {
+  title?: string;
   formData?: FormFields,
   isSubmitting: boolean,
   onSubmit: (fields: FormFields) => void
@@ -11,7 +12,7 @@ export type FormProps = {
 
 const RequiredFieldMessage = () => (<div className="text-red-700"> This field is required</div>);
 
-export const Form = ({ formData = {}, isSubmitting, onSubmit }: FormProps): ReactElement => {
+export const Form = ({ title = "", formData = {}, isSubmitting, onSubmit }: FormProps): ReactElement => {
   const { register, handleSubmit, formState: { errors } } = useForm<FormFields>({
     defaultValues: formData
   });
@@ -19,6 +20,7 @@ export const Form = ({ formData = {}, isSubmitting, onSubmit }: FormProps): Reac
   return (
     <div className="flex flex-col justify-center">
       <div style={{ width: 900 }} className="mx-auto shadow-lg rounded p-5">
+        <p className="text-lg font-medium text-gray-900 mb-2">{title}</p>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-6">
             <label htmlFor="serialKey" className="block mb-2 text-sm font-medium text-gray-900">Serial Key:</label>
