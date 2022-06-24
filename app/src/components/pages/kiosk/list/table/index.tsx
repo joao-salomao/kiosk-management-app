@@ -24,7 +24,7 @@ export const Table = (
   }: TableProps
 ): ReactElement => {
   return (
-    <div className="overflow-x-auto shadow-md sm:rounded-lg p-2">
+    <div className="overflow-x-auto shadow-lg sm:rounded-lg p-2">
       <div className="flex mb-2">
         <SearchFilter />
         <StatusFilter />
