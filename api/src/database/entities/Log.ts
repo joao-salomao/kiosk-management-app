@@ -15,6 +15,12 @@ export class Log {
   @Column()
   description: string;
 
+  @Column()
+  kioskId: number;
+
+  @Column()
+  userId: number;
+
   @ManyToOne(() => Kiosk, (kiosk) => kiosk.logs)
   kiosk: Kiosk;
 

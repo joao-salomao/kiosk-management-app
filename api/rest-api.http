@@ -33,3 +33,12 @@ content-type: application/json
 ############# Delete Kiosk
 DELETE http://localhost:3001/kiosks/15 HTTP/1.1
 content-type: application/json
+
+
+#############  Kiosk logs
+GET http://localhost:3001/kiosks/2/logs HTTP/1.1
+content-type: application/json
+
+#############  All logs
+GET http://localhost:3001/logs HTTP/1.1
+content-type: application/json

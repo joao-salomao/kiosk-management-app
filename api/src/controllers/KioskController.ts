@@ -10,41 +10,142 @@ import {
 import { Repository } from "typeorm";
 import { AppDataSource } from "../database/data-source";
 import { Kiosk } from "../database/entities/Kiosk";
+import { User } from "../database/entities/User";
+import { Log } from "../database/entities/Log";
 
 @JsonController()
 export class KioskController {
-  private repository: Repository<Kiosk>;
+  private kioskRepository: Repository<Kiosk>;
+  private userRepository: Repository<User>;
+  private logRepository: Repository<Log>;
 
   constructor() {
-    this.repository = AppDataSource.getRepository(Kiosk);
+    this.kioskRepository = AppDataSource.getRepository(Kiosk);
+    this.userRepository = AppDataSource.getRepository(User);
+    this.logRepository = AppDataSource.getRepository(Log);
   }
 
   @Get("/kiosks")
   getAll() {
-    return this.repository.find();
+    return this.kioskRepository.find();
   }
 
   @Get("/kiosks/:id")
   getOne(@Param("id") id: number) {
-    return this.repository.findOne({
+    return this.kioskRepository.findOne({
       where: {
         id,
       },
     });
   }
 
+  @Get("/logs")
+  async allLogs() {
+    return this.logRepository.find({
+      relations: ["user", "kiosk"],
+    });
+  }
+
+  @Get("/kiosks/:id/logs")
+  async logs(@Param("id") id: number) {
+    return this.logRepository.find({
+      where: {
+        kioskId: id,
+      },
+      relations: ["user", "kiosk"],
+    });
+  }
+
   @Post("/kiosks")
-  post(@Body() kiosk: Omit<Kiosk, "id">) {
-    return this.repository.insert(kiosk);
+  async post(@Body() kioskData: Kiosk) {
+    const kiosk = this.kioskRepository.create(kioskData);
+
+    await this.kioskRepository.save(kiosk);
+    await this.createActionLog(kiosk, "create kiosk", kiosk, kioskData);
+
+    return { status: "success", message: "Kiosk created" };
   }
 
   @Put("/kiosks/:id")
-  put(@Param("id") id: number, @Body() kiosk: Omit<Kiosk, "id">) {
-    return this.repository.update(id, kiosk);
+  async put(@Param("id") id: number, @Body() kioskData: Omit<Kiosk, "id">) {
+    const kiosk = await this.kioskRepository.findOne({
+      where: {
+        id,
+      },
+    });
+
+    await this.kioskRepository.update(kiosk.id, kioskData);
+    await this.createActionLog(kiosk, "update kiosk", kiosk, kioskData);
+
+    return { status: "success", message: "Kiosk updated" };
   }
 
   @Delete("/kiosks/:id")
-  remove(@Param("id") id: number) {
-    return this.repository.delete(id);
+  async remove(@Param("id") id: number) {
+    const kiosk = await this.findKiosk(id);
+
+    await this.kioskRepository.delete(id);
+    await this.createActionLog(kiosk, "delete kiosk");
+
+    return { status: "success", message: "Kiosk updated" };
+  }
+
+  private findKiosk(id: number): Promise<Kiosk> {
+    return this.kioskRepository.findOne({
+      where: {
+        id,
+      },
+    });
+  }
+
+  private async createActionLog(
+    kiosk: Kiosk,
+    action: string,
+    oldData?: Omit<Kiosk, "id">,
+    newData?: Omit<Kiosk, "id">
+  ) {
+    const defaultUser = await this.getDefaultUser();
+
+    await this.logRepository.insert({
+      kiosk,
+      action,
+      user: defaultUser,
+      description:
+        oldData && newData ? this.prepareDiffJson(oldData, newData) : "",
+    });
+  }
+
+  private getDefaultUser(): Promise<User> {
+    return this.userRepository.findOne({
+      where: {
+        name: "João Salomão",
+      },
+    });
+  }
+
+  private prepareDiffJson(
+    oldData: Omit<Kiosk, "id">,
+    newData: Omit<Kiosk, "id">
+  ): string {
+    const uniqueKeys = [
+      ...new Set([...Object.keys(oldData), ...Object.keys(newData)]),
+    ].filter((key) => key !== "id");
+
+    const diffObject: Record<string, any> = {
+      from: {},
+      to: {},
+    };
+
+    uniqueKeys.forEach((key) => {
+      const oldValue = oldData[key];
+      const newValue = newData[key];
+
+      if (newValue !== oldValue) {
+        diffObject[key]["from"] = oldValue;
+        diffObject[key]["to"] = newValue;
+      }
+    });
+
+    return JSON.stringify(diffObject);
   }
 }
