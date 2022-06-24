@@ -27,7 +27,31 @@ exports[`renders loader correctly 1`] = `
           className="px-6 py-3"
           scope="col"
         >
+          Serial Key
+        </th>
+        <th
+          className="px-6 py-3"
+          scope="col"
+        >
           Description
+        </th>
+        <th
+          className="px-6 py-3"
+          scope="col"
+        >
+          Is Closed?
+        </th>
+        <th
+          className="px-6 py-3"
+          scope="col"
+        >
+          Opens at
+        </th>
+        <th
+          className="px-6 py-3"
+          scope="col"
+        >
+          Closes at
         </th>
         <th
           className="px-6 py-3"
@@ -43,7 +67,7 @@ exports[`renders loader correctly 1`] = `
       >
         <th
           className="px-6 py-4 text-center"
-          colSpan={3}
+          colSpan={7}
           scope="row"
         >
           Carregando
@@ -81,7 +105,31 @@ exports[`renders the kiosk list correctly 1`] = `
           className="px-6 py-3"
           scope="col"
         >
+          Serial Key
+        </th>
+        <th
+          className="px-6 py-3"
+          scope="col"
+        >
           Description
+        </th>
+        <th
+          className="px-6 py-3"
+          scope="col"
+        >
+          Is Closed?
+        </th>
+        <th
+          className="px-6 py-3"
+          scope="col"
+        >
+          Opens at
+        </th>
+        <th
+          className="px-6 py-3"
+          scope="col"
+        >
+          Closes at
         </th>
         <th
           className="px-6 py-3"
@@ -104,7 +152,27 @@ exports[`renders the kiosk list correctly 1`] = `
         <td
           className="px-6 py-4"
         >
+          NDK-1
+        </td>
+        <td
+          className="px-6 py-4"
+        >
           Burguer King
+        </td>
+        <td
+          className="px-6 py-4"
+        >
+          No
+        </td>
+        <td
+          className="px-6 py-4"
+        >
+          09:00
+        </td>
+        <td
+          className="px-6 py-4"
+        >
+          22:00
         </td>
         <td
           className="px-6 py-4"
@@ -135,7 +203,27 @@ exports[`renders the kiosk list correctly 1`] = `
         <td
           className="px-6 py-4"
         >
+          NDK-2
+        </td>
+        <td
+          className="px-6 py-4"
+        >
           Mac
+        </td>
+        <td
+          className="px-6 py-4"
+        >
+          No
+        </td>
+        <td
+          className="px-6 py-4"
+        >
+          09:00
+        </td>
+        <td
+          className="px-6 py-4"
+        >
+          22:00
         </td>
         <td
           className="px-6 py-4"

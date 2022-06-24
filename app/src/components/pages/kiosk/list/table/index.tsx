@@ -1,5 +1,6 @@
 import { Kiosk } from "lib/types";
 import { ReactElement } from "react";
+import { formatTime } from "lib/utils/formatTime";
 
 export type TableProps = {
   kiosks: Kiosk[];
@@ -20,7 +21,19 @@ export const Table = ({ kiosks, isLoading, onClickNew, onClickEdit, onClickDelet
               ID
             </th>
             <th scope="col" className="px-6 py-3">
+              Serial Key
+            </th>
+            <th scope="col" className="px-6 py-3">
               Description
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Is Closed?
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Opens at
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Closes at
             </th>
             <th scope="col" className="px-6 py-3">
               Actions
@@ -30,7 +43,7 @@ export const Table = ({ kiosks, isLoading, onClickNew, onClickEdit, onClickDelet
         <tbody>
           {isLoading && (
             <tr className="bg-white border-b bg-gray-800 border-gray-700">
-              <th colSpan={3} scope="row" className="px-6 py-4 text-center">
+              <th colSpan={7} scope="row" className="px-6 py-4 text-center">
                 Carregando
               </th>
             </tr>
@@ -44,7 +57,11 @@ export const Table = ({ kiosks, isLoading, onClickNew, onClickEdit, onClickDelet
                 <th scope="row" className="px-6 py-4">
                   {item.id}
                 </th>
+                <td className="px-6 py-4">{item.serialKey}</td>
                 <td className="px-6 py-4">{item.description}</td>
+                <td className="px-6 py-4">{item.isKioskClosed ? 'Yes' : 'No'}</td>
+                <td className="px-6 py-4">{formatTime(item.storeOpensAt)}</td>
+                <td className="px-6 py-4">{formatTime(item.storeClosesAt)}</td>
                 <td className="px-6 py-4">
                   <button className="bg-white rounded p-1 mr-2" onClick={() => onClickEdit(item.id)}>Edit</button>
                   <button className="bg-white rounded p-1" onClick={() => onClickDelete(item.id)}>Delete</button>
