@@ -1,8 +1,10 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Transform } from "class-transformer";
 
 @Entity({ name: "kiosks" })
 export class Kiosk {
   @PrimaryGeneratedColumn()
+  @Transform(({ value }) => value.toString())
   id: number;
 
   @Column()
