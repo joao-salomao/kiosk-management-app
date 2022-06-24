@@ -8,8 +8,9 @@ export type TableProps = {
   kiosks: Kiosk[];
   isLoading: boolean;
   onClickNew: () => void
-  onClickEdit: (id: Kiosk['id']) => void
+  onClickEdit: (kioskId: Kiosk['id']) => void
   onClickDelete: (kioskId: Kiosk['id']) => void
+  onClickLogs: (kioskId: Kiosk['id']) => void
 };
 
 export const Table = (
@@ -18,6 +19,7 @@ export const Table = (
     isLoading,
     onClickNew,
     onClickEdit,
+    onClickLogs,
     onClickDelete,
   }: TableProps
 ): ReactElement => {
@@ -77,6 +79,7 @@ export const Table = (
                 <td className="px-6 py-4">{formatTime(item.storeOpensAt)}</td>
                 <td className="px-6 py-4">{formatTime(item.storeClosesAt)}</td>
                 <td className="px-6 py-4">
+                  <button className="bg-white rounded p-1 mr-2" onClick={() => onClickLogs(item.id)}>Logs</button>
                   <button className="bg-white rounded p-1 mr-2" onClick={() => onClickEdit(item.id)}>Edit</button>
                   <button className="bg-white rounded p-1" onClick={() => onClickDelete(item.id)}>Delete</button>
                 </td>

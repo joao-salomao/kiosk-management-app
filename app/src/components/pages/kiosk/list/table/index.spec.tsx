@@ -29,6 +29,7 @@ it('renders the kiosk list correctly', () => {
         isLoading={false}
         onClickNew={jest.fn()}
         onClickEdit={jest.fn()}
+        onClickLogs={jest.fn()}
         onClickDelete={jest.fn()}
       />
     )
@@ -47,6 +48,7 @@ it('renders loader correctly', () => {
         isLoading={true}
         onClickNew={jest.fn()}
         onClickEdit={jest.fn()}
+        onClickLogs={jest.fn()}
         onClickDelete={jest.fn()}
       />
     )
@@ -65,6 +67,7 @@ it('call the handler on click the "New Kiosk" button', () => {
 
       onClickNew={onClickNewMock}
       onClickEdit={jest.fn()}
+      onClickLogs={jest.fn()}
       onClickDelete={jest.fn()}
     />
   );
@@ -95,6 +98,7 @@ it('call the handler on click the "Delete" button', () => {
       isLoading={false}
       onClickNew={jest.fn()}
       onClickEdit={jest.fn()}
+      onClickLogs={jest.fn()}
       onClickDelete={onClickDeleteMock}
     />
   );
@@ -122,8 +126,9 @@ it('call the handler on click the "Edit" button', () => {
       kiosks={[kiosk]}
       isLoading={false}
       onClickNew={jest.fn()}
-      onClickEdit={onClickEditMock}
+      onClickLogs={jest.fn()}
       onClickDelete={jest.fn()}
+      onClickEdit={onClickEditMock}
     />
   );
 

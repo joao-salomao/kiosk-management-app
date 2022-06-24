@@ -10,7 +10,8 @@ import {
 import { ToastContainer } from 'react-toastify';
 import { Header } from './header';
 import { Footer } from './footer';
-import { List, Edit, New } from './pages/kiosk'
+import { List, Edit, New, Logs } from './pages/kiosk'
+
 
 export function App(): ReactElement {
   return (
@@ -20,8 +21,9 @@ export function App(): ReactElement {
         <main className='p-4 m-4'>
           <Routes>
             <Route path="/" element={<List />} />
-            <Route path="/edit/:kioskId" element={<Edit />} />
             <Route path="/new" element={<New />} />
+            <Route path="/edit/:kioskId" element={<Edit />} />
+            <Route path="/logs/:kioskId" element={<Logs />} />
           </Routes>
 
           <ToastContainer

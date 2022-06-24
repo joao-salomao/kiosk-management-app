@@ -33,6 +33,10 @@ export const List = (): ReactElement => {
     navigate(`/edit/${id}`);
   }, [navigate]);
 
+  const onClickLogsHandler: TableProps['onClickLogs'] = useCallback((id) => {
+    navigate(`/logs/${id}`);
+  }, [navigate]);
+
   const fetchAll = useCallback(async () => {
     setIsLoading(true);
 
@@ -54,6 +58,7 @@ export const List = (): ReactElement => {
       isLoading={isLoading}
       onClickNew={onClickNewHandle}
       onClickEdit={onclickEditHandle}
+      onClickLogs={onClickLogsHandler}
       onClickDelete={onClickDeleteHandle}
     />
   )
