@@ -18,6 +18,10 @@ export const List = (): ReactElement => {
     deleteById(id);
   }, [deleteById]);
 
+  const onclickEditHandle: TableProps['onClickEdit'] = useCallback((id) => {
+    navigate(`/edit/${id}`);
+  }, [navigate]);
+
   useEffect(() => {
     fetchAll();
   }, [fetchAll]);
@@ -27,6 +31,7 @@ export const List = (): ReactElement => {
       kiosks={list}
       isLoading={isLoading}
       onClickNew={onClickNewHandle}
+      onClickEdit={onclickEditHandle}
       onClickDelete={onClickDeleteHandle}
     />
   )

@@ -24,7 +24,13 @@ it('renders the kiosk list correctly', () => {
 
   const tree = renderer
     .create(
-      <Table kiosks={kiosks} isLoading={false} onClickNew={jest.fn()} onClickDelete={jest.fn()} />
+      <Table
+        kiosks={kiosks}
+        isLoading={false}
+        onClickNew={jest.fn()}
+        onClickEdit={jest.fn()}
+        onClickDelete={jest.fn()}
+      />
     )
     .toJSON();
 
@@ -36,7 +42,13 @@ it('renders loader correctly', () => {
 
   const tree = renderer
     .create(
-      <Table kiosks={[]} isLoading={true} onClickNew={jest.fn()} onClickDelete={jest.fn()} />
+      <Table
+        kiosks={[]}
+        isLoading={true}
+        onClickNew={jest.fn()}
+        onClickEdit={jest.fn()}
+        onClickDelete={jest.fn()}
+      />
     )
     .toJSON();
 
@@ -47,7 +59,13 @@ it('call the handler on click the "New Kiosk" button', () => {
   const onClickNewMock = jest.fn();
 
   render(
-    <Table kiosks={[]} isLoading={false} onClickNew={onClickNewMock} onClickDelete={jest.fn()} />
+    <Table
+      kiosks={[]}
+      isLoading={false}
+      onClickNew={onClickNewMock}
+      onClickEdit={jest.fn()}
+      onClickDelete={jest.fn()}
+    />
   );
 
   const button = screen.getByText(/new kiosk/i);
@@ -71,11 +89,45 @@ it('call the handler on click the "Delete" button', () => {
   ]
 
   render(
-    <Table kiosks={kiosks} isLoading={false} onClickNew={jest.fn()} onClickDelete={onClickDeleteMock} />
+    <Table
+      kiosks={kiosks}
+      isLoading={false}
+      onClickNew={jest.fn()}
+      onClickEdit={jest.fn()}
+      onClickDelete={onClickDeleteMock}
+    />
   );
 
   const button = screen.getByText(/delete/i);
   fireEvent.click(button);
 
   expect(onClickDeleteMock).toHaveBeenCalled();
+});
+
+it('call the handler on click the "Edit" button', () => {
+  const onClickEditMock = jest.fn();
+
+  const kiosk = {
+    id: "1",
+    serialKey: "NDK-1",
+    description: "Burguer King",
+    isKioskClosed: false,
+    storeOpensAt: "09:00:00",
+    storeClosesAt: "22:00:00"
+  }
+
+  render(
+    <Table
+      kiosks={[kiosk]}
+      isLoading={false}
+      onClickNew={jest.fn()}
+      onClickEdit={onClickEditMock}
+      onClickDelete={jest.fn()}
+    />
+  );
+
+  const button = screen.getByText(/edit/i);
+  fireEvent.click(button);
+
+  expect(onClickEditMock).toHaveBeenCalledWith(kiosk.id);
 });

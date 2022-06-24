@@ -5,10 +5,11 @@ export type TableProps = {
   kiosks: Kiosk[];
   isLoading: boolean;
   onClickNew: () => void
+  onClickEdit: (id: Kiosk['id']) => void
   onClickDelete: (kioskId: Kiosk['id']) => void
 };
 
-export const Table = ({ kiosks, isLoading, onClickNew, onClickDelete }: TableProps): ReactElement => {
+export const Table = ({ kiosks, isLoading, onClickNew, onClickEdit, onClickDelete }: TableProps): ReactElement => {
   return (
     <div className="overflow-x-auto shadow-md sm:rounded-lg p-2">
       <button className="float-right bg-gray-500 mb-2 rounded p-1 text-white text-center" onClick={onClickNew}>New Kiosk</button>
@@ -45,6 +46,7 @@ export const Table = ({ kiosks, isLoading, onClickNew, onClickDelete }: TablePro
                 </th>
                 <td className="px-6 py-4">{item.description}</td>
                 <td className="px-6 py-4">
+                  <button className="bg-white rounded p-1 mr-2" onClick={() => onClickEdit(item.id)}>Edit</button>
                   <button className="bg-white rounded p-1" onClick={() => onClickDelete(item.id)}>Delete</button>
                 </td>
               </tr>
