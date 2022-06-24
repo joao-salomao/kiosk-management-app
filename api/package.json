@@ -27,7 +27,8 @@
   "scripts": {
     "dev": "nodemon --watch src/ --exec ts-node src/index.ts -e ts",
     "start": "ts-node src/index.ts",
-    "typeorm": "typeorm-ts-node-commonjs",
-    "db:migrate": " npm run typeorm -- migration:run -d src/database/data-source.ts"
+    "typeorm": "typeorm-ts-node-esm",
+    "db:migrate": " npm run typeorm -- migration:run -d src/database/data-source.ts",
+    "db:sync": " npm run typeorm -- schema:sync -d src/database/data-source.ts"
   }
 }

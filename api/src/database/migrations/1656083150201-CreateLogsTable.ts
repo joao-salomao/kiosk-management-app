@@ -65,6 +65,6 @@ export class CreateLogsTable1656083150201 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    return queryRunner.dropTable("users");
+    return queryRunner.dropTable("logs");
   }
 }
