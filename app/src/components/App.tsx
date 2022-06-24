@@ -1,8 +1,4 @@
 import { ReactElement } from 'react';
-import { Header } from './header';
-import { Footer } from './footer';
-import { List, Edit, New } from './pages/kiosk'
-
 import {
   Route,
   Routes,
@@ -11,6 +7,10 @@ import {
 import {
   RecoilRoot
 } from 'recoil';
+import { ToastContainer } from 'react-toastify';
+import { Header } from './header';
+import { Footer } from './footer';
+import { List, Edit, New } from './pages/kiosk'
 
 export function App(): ReactElement {
   return (
@@ -23,6 +23,18 @@ export function App(): ReactElement {
             <Route path="/edit" element={<Edit />} />
             <Route path="/new" element={<New />} />
           </Routes>
+
+          <ToastContainer
+            draggable
+            closeOnClick
+            pauseOnHover
+            hideProgressBar
+            pauseOnFocusLoss
+            rtl={false}
+            autoClose={2000}
+            position="top-right"
+            newestOnTop={false}
+          />
         </main>
         <Footer />
       </Router>

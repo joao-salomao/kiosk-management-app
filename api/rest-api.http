@@ -1,13 +1,13 @@
 ############# Get all kiosks
-GET http://localhost:3000/kiosks HTTP/1.1
+GET http://localhost:3001/kiosks HTTP/1.1
 content-type: application/json
 
 ############# Get one kiosk
-GET http://localhost:3000/kiosks/14 HTTP/1.1
+GET http://localhost:3001/kiosks/14 HTTP/1.1
 content-type: application/json
 
 ############# Create Kiosk
-POST http://localhost:3000/kiosks HTTP/1.1
+POST http://localhost:3001/kiosks HTTP/1.1
 content-type: application/json
 
 {
@@ -19,7 +19,7 @@ content-type: application/json
 }
 
 ############# Update Kiosk
-PUT http://localhost:3000/kiosks/15 HTTP/1.1
+PUT http://localhost:3001/kiosks/15 HTTP/1.1
 content-type: application/json
 
 {
@@ -31,5 +31,5 @@ content-type: application/json
 }
 
 ############# Delete Kiosk
-DELETE http://localhost:3000/kiosks/15 HTTP/1.1
+DELETE http://localhost:3001/kiosks/15 HTTP/1.1
 content-type: application/json
