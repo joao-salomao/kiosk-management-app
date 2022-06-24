@@ -1,6 +1,8 @@
 
 import { ReactElement, useCallback, useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import SweetAlert from 'sweetalert2';
+import { toast } from 'react-toastify';
 import {
   useRecoilState,
   useRecoilValue
@@ -20,13 +22,22 @@ export const List = (): ReactElement => {
   const onClickNewHandle: TableProps['onClickNew'] = useCallback(() => navigate('/new'), [navigate]);
 
   const onClickDeleteHandle: TableProps['onClickDelete'] = useCallback(async (id) => {
-    const result = window.confirm("You really want delete this Kiosk?");
+    SweetAlert.fire({
+      title: `You really want delete the Kiosk #${id}?`,
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      denyButtonText: 'No',
+      showLoaderOnConfirm: true,
+      confirmButtonColor: "#1D4ED8",
+      preConfirm: async (result) => {
+        if (!result) return;
 
-    if (!result) return;
+        await repository.delete(id);
 
-    await repository.delete(id);
-
-    setKioskList((list) => list.filter(k => k.id !== id));
+        toast.success(`Kiosk #${id} successfully delete!`, { type: 'success' });
+        setKioskList((list) => list.filter(k => k.id !== id));
+      }
+    })
   }, [setKioskList]);
 
   const onclickEditHandle: TableProps['onClickEdit'] = useCallback((id) => {
