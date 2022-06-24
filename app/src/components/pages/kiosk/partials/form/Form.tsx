@@ -5,13 +5,13 @@ import { Kiosk } from "lib/types";
 export type FormFields = Partial<Omit<Kiosk, 'id'>>;
 export type FormProps = {
   formData?: FormFields,
-  isLoading: boolean,
+  isSubmitting: boolean,
   onSubmit: (fields: FormFields) => void
 };
 
 const RequiredFieldMessage = () => (<div> This field is required</div>);
 
-export const Form = ({ formData = {}, isLoading, onSubmit }: FormProps): ReactElement => {
+export const Form = ({ formData = {}, isSubmitting, onSubmit }: FormProps): ReactElement => {
   const { register, handleSubmit, formState: { errors } } = useForm<FormFields>({
     defaultValues: formData
   });
@@ -73,7 +73,7 @@ export const Form = ({ formData = {}, isLoading, onSubmit }: FormProps): ReactEl
       </div>
 
       <button type="submit">
-        {isLoading ? 'Saving' : 'Save'}
+        {isSubmitting ? 'Saving' : 'Save'}
       </button>
 
     </form>

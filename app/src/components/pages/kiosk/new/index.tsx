@@ -8,14 +8,14 @@ import { repository } from 'lib/repositories/kiosk';
 
 export const New = (): ReactElement => {
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const onSubmit = useCallback(async (fields: FormFields) => {
-    setIsLoading(true);
+    setIsSubmitting(true);
 
     await repository.create(fields as Kiosk);
 
-    setIsLoading(false);
+    setIsSubmitting(false);
     toast.success("Kiosk successfully created!", { type: 'success' });
     navigate("/");
 
@@ -24,7 +24,7 @@ export const New = (): ReactElement => {
   return <div>
     <Form
       onSubmit={onSubmit}
-      isLoading={isLoading}
+      isSubmitting={isSubmitting}
     />
   </div>
 }

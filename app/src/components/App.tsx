@@ -20,7 +20,7 @@ export function App(): ReactElement {
         <main className='p-4 m-4'>
           <Routes>
             <Route path="/" element={<List />} />
-            <Route path="/edit" element={<Edit />} />
+            <Route path="/edit/:kioskId" element={<Edit />} />
             <Route path="/new" element={<New />} />
           </Routes>
 

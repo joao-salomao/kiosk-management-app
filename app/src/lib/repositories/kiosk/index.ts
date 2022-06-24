@@ -8,9 +8,26 @@ export const repository = {
     return response.json();
   },
 
+  async find(id: Kiosk["id"]): Promise<Kiosk> {
+    const response = await fetch(KIOSKS_BASE_URL + `/${id}`);
+    return response.json();
+  },
+
   async create(data: Omit<Kiosk, "id">) {
     const response = await fetch(KIOSKS_BASE_URL, {
       method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    return response.json();
+  },
+
+  async update(id: Kiosk["id"], data: Omit<Kiosk, "id">) {
+    const response = await fetch(KIOSKS_BASE_URL + `/${id}`, {
+      method: "PUT",
       headers: {
         "content-type": "application/json",
       },
