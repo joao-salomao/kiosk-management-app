@@ -6,7 +6,6 @@ import {
 
 import { ToastContainer } from 'react-toastify';
 import { Header } from './header';
-import { Footer } from './footer';
 import { List, Edit, New, Logs } from './pages/kiosk'
 
 
@@ -35,7 +34,6 @@ export function App(): ReactElement {
           newestOnTop={false}
         />
       </main>
-      <Footer />
     </>
   );
 }
