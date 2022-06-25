@@ -5,6 +5,7 @@ import SweetAlert from 'sweetalert2';
 import { toast } from 'react-toastify';
 import { repository } from 'lib/repositories/kiosk';
 import { Form, FormFields } from '../partials/form'
+import { Spinner } from 'components/spinner';
 import { Kiosk } from 'lib/types';
 
 export const Edit = (): ReactElement => {
@@ -59,7 +60,10 @@ export const Edit = (): ReactElement => {
   }, [loadKiosk]);
 
   return <div>
-    {isLoadingKiosk && (<div>Carregando</div>)}
+    {isLoadingKiosk && (<div className="h-20 w-20 mx-auto">
+      <p className="mb-2">Carregando</p>
+      <Spinner />
+    </div>)}
     {
       !isLoadingKiosk && (
         <Form
