@@ -1,6 +1,6 @@
+import { ReactElement } from "react";
 import { Log } from "lib/types";
 import { logValueParser } from "lib/utils/logValueParser";
-import { ReactElement } from "react";
 
 export const DiffChanges = ({ log }: { log: Log }): ReactElement => {
   const changes = JSON.parse(log.description);

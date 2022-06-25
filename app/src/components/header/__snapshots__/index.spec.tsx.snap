@@ -3,19 +3,29 @@
 exports[`renders correctly 1`] = `
 <header>
   <nav
-    className="bg-white border-gray-200 px-1 sm:px-4 py-2.5 rounded bg-gray-800"
+    className="flex align-center bg-white border-gray-200 px-1 sm:px-4 py-2.5 bg-gray-800"
   >
-    <div
-      className="container flex flex-wrap justify-between items-center mx-auto"
+    <a
+      className="block text-xl font-semibold rounded hover:bg-gray-700 text-white mr-8 p-2"
+      href="/"
+      onClick={[Function]}
     >
-      <a
-        className="self-center text-xl font-semibold whitespace-nowrap text-white"
-        href="/"
-        onClick={[Function]}
-      >
-        Kiosk Management App
-      </a>
-    </div>
+      Kiosk Management App
+    </a>
+    <a
+      className="block rounded p-2 text-white border-gray-100 hover:bg-gray-700 mr-4"
+      href="/"
+      onClick={[Function]}
+    >
+      Kiosks
+    </a>
+    <a
+      className="block rounded p-2 text-white border-gray-100 hover:bg-gray-700"
+      href="/logs"
+      onClick={[Function]}
+    >
+      Logs
+    </a>
   </nav>
 </header>
 `;
