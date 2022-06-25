@@ -42,14 +42,32 @@ it('renders the kiosk list correctly', () => {
 });
 
 
-it('renders loader correctly', () => {
-
+it('renders the loader correctly', () => {
   const tree = renderer
     .create(
       <RecoilRoot>
         <Table
           kiosks={[]}
           isLoading={true}
+          onClickNew={jest.fn()}
+          onClickEdit={jest.fn()}
+          onClickLogs={jest.fn()}
+          onClickDelete={jest.fn()}
+        />
+      </RecoilRoot>
+    )
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('renders the empty list message when there is no kiosks to show', () => {
+  const tree = renderer
+    .create(
+      <RecoilRoot>
+        <Table
+          kiosks={[]}
+          isLoading={false}
           onClickNew={jest.fn()}
           onClickEdit={jest.fn()}
           onClickLogs={jest.fn()}
@@ -79,7 +97,7 @@ it('call the handler on click the "New Kiosk" button', () => {
     </RecoilRoot>
   );
 
-  const button = screen.getByText(/new kiosk/i);
+  const button = screen.getByRole('button');
   fireEvent.click(button);
 
   expect(onClickNewMock).toHaveBeenCalled();

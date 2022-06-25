@@ -64,13 +64,28 @@ it('renders logs list correctly', () => {
 });
 
 
-it('renders loader correctly', () => {
+it('renders the loader correctly', () => {
   const tree = renderer
     .create(
       <RecoilRoot>
         <List
           logs={[]}
           isLoading={true}
+        />
+      </RecoilRoot>
+    )
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('renders the empty list message when there is no logs to show', () => {
+  const tree = renderer
+    .create(
+      <RecoilRoot>
+        <List
+          logs={[]}
+          isLoading={false}
         />
       </RecoilRoot>
     )
