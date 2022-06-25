@@ -1,6 +1,7 @@
 
 import { ReactElement, useCallback, useState, useEffect } from 'react';
 import { useParams, useNavigate } from "react-router-dom";
+import SweetAlert from 'sweetalert2';
 import { toast } from 'react-toastify';
 import { repository } from 'lib/repositories/kiosk';
 import { Form, FormFields } from '../partials/form'
@@ -16,6 +17,19 @@ export const Edit = (): ReactElement => {
 
   const onSubmit = useCallback(async (fields: FormFields) => {
     try {
+      const result = await SweetAlert.fire({
+        title: `You really want update the Kiosk #${params.kioskId}?`,
+        showCancelButton: true,
+        confirmButtonText: 'Yes',
+        denyButtonText: 'No',
+        backdrop: false,
+        confirmButtonColor: "#1D4ED8",
+      });
+
+      if (result.isDismissed || result.isDenied) {
+        return toast.info("The changes wasn't persisted.");
+      };
+
       setIsSubmitting(true);
 
       await repository.update(params.kioskId as string, fields as Kiosk);
