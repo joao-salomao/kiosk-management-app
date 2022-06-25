@@ -1,5 +1,145 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`when is not submitting the form renders correctly 1`] = `
+<div
+  className="flex flex-col justify-center"
+>
+  <div
+    className="mx-auto shadow-lg rounded p-5"
+    style={
+      Object {
+        "width": 900,
+      }
+    }
+  >
+    <p
+      className="text-lg font-medium text-gray-900 mb-2"
+    />
+    <form
+      onSubmit={[Function]}
+    >
+      <div
+        className="mb-6"
+      >
+        <label
+          className="block mb-2 text-sm font-medium text-gray-900"
+          htmlFor="serialKey"
+          id="serialKeyLabel"
+        >
+          Serial Key:
+        </label>
+        <input
+          aria-labelledby="serialKeyLabel"
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          name="serialKey"
+          onBlur={[Function]}
+          onChange={[Function]}
+          placeholder="Ex: 123-NZD-123"
+          type="text"
+        />
+      </div>
+      <div
+        className="mb-6"
+      >
+        <label
+          className="block mb-2 text-sm font-medium text-gray-900"
+          htmlFor="description"
+          id="descriptionLabel"
+        >
+          Description:
+        </label>
+        <textarea
+          aria-labelledby="descriptionLabel"
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          cols={33}
+          name="description"
+          onBlur={[Function]}
+          onChange={[Function]}
+          rows={2}
+        />
+      </div>
+      <div
+        className="mb-6"
+      >
+        <label
+          className="block text-sm font-medium text-gray-900 mb-2"
+          htmlFor="isKioskClosed"
+          id="isKioskClosedLabel"
+        >
+          Is closed?
+        </label>
+        <label
+          className="inline-flex relative items-center cursor-pointer"
+        >
+          <input
+            aria-labelledby="isKioskClosedLabel"
+            className="sr-only peer"
+            name="isKioskClosed"
+            onBlur={[Function]}
+            onChange={[Function]}
+            type="checkbox"
+          />
+          <div
+            className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"
+          />
+        </label>
+      </div>
+      <div
+        className="mb-6"
+      >
+        <div
+          className="flex"
+        >
+          <div
+            className="mr-4"
+          >
+            <label
+              className="block mb-2 text-sm font-medium text-gray-900"
+              htmlFor="storeOpensAt"
+              id="storeOpensAtLabel"
+            >
+              Store opens at:
+            </label>
+            <input
+              aria-labelledby="storeOpensAtLabel"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              name="storeOpensAt"
+              onBlur={[Function]}
+              onChange={[Function]}
+              type="time"
+            />
+          </div>
+          <div>
+            <label
+              className="block mb-2 text-sm font-medium text-gray-900"
+              htmlFor="storeClosesAt"
+              id="storeClosesAtLabel"
+            >
+              Store closes at:
+            </label>
+            <input
+              aria-labelledby="storeClosesAtLabel"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              name="storeClosesAt"
+              onBlur={[Function]}
+              onChange={[Function]}
+              type="time"
+            />
+          </div>
+        </div>
+      </div>
+      <button
+        className="float-right text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 focus:outline-none h-10 mt-auto"
+        disabled={false}
+        type="submit"
+      >
+        Save
+      </button>
+    </form>
+  </div>
+</div>
+`;
+
 exports[`when is submitting the form renders correctly 1`] = `
 <div
   className="flex flex-col justify-center"
