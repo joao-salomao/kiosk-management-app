@@ -1,11 +1,13 @@
-import { ReactElement, useState, useCallback } from "react";
-import { useMountEffect } from '@react-hookz/web/esm';
+import { ReactElement, useState, useCallback, useEffect } from "react";
 import { repository } from "lib/repositories/logs";
+import { useParams } from "react-router-dom";
 import { List } from "./list";
 import { logsListState, filteredLogsListState } from "lib/states/logsList";
 import { useRecoilState, useRecoilValue } from "recoil";
 
 export const Logs = (): ReactElement => {
+  const params = useParams();
+
   const [isLoading, setIsLoading] = useState(false);
 
   const [, setLogs] = useRecoilState(logsListState);
@@ -14,15 +16,17 @@ export const Logs = (): ReactElement => {
   const fetchLogs = useCallback(async () => {
     setIsLoading(true);
 
-    const logs = await repository.all();
+    const logs = params?.kioskId ?
+      await repository.findKioskLogs(params?.kioskId) : await repository.all();
 
     setIsLoading(false);
     setLogs(logs);
-  }, [setLogs]);
+  }, [setLogs, params?.kioskId]);
 
-  useMountEffect(() => {
+  useEffect(() => {
     fetchLogs();
-  });
+  }, [fetchLogs]);
+
 
   return (
     <List isLoading={isLoading} logs={filteredKioskList} />
