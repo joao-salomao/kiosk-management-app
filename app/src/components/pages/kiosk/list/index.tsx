@@ -1,5 +1,5 @@
 
-import { ReactElement, useCallback, useEffect, useState } from 'react';
+import { ReactElement, useCallback, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import SweetAlert from 'sweetalert2';
 import { toast } from 'react-toastify';
@@ -10,6 +10,7 @@ import {
 import { repository } from "lib/repositories/kiosk";
 import { Table, TableProps } from './table'
 import { filteredKioskListState, kioskListState } from 'lib/states/kioskList.ts';
+import { useMountEffect } from '@react-hookz/web';
 
 export const List = (): ReactElement => {
   const navigate = useNavigate();
@@ -58,10 +59,9 @@ export const List = (): ReactElement => {
   }, [setKioskList]);
 
 
-  useEffect(() => {
+  useMountEffect(() => {
     fetchAll();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  });
 
   return (
     <Table
