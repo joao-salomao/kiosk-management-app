@@ -27,7 +27,6 @@ export const Logs = (): ReactElement => {
     fetchLogs();
   }, [fetchLogs]);
 
-
   return (
     <List isLoading={isLoading} logs={filteredKioskList} />
   )

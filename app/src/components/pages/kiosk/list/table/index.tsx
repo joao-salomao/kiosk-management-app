@@ -74,6 +74,15 @@ export const Table = (
               </th>
             </tr>
           )}
+          {
+            !isLoading && kiosks.length === 0 && (
+              <tr className="bg-white border-b">
+                <th colSpan={7} scope="row" className="px-6 py-4 text-center">
+                  No results to show, try to change the filters or create a new kiosk.
+                </th>
+              </tr>
+            )
+          }
           {!isLoading &&
             kiosks.map((item) => (
               <tr

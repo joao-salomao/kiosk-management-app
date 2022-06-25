@@ -29,6 +29,13 @@ export const List = ({ isLoading, logs }: ListProps): ReactElement => {
         )
       }
       {
+        !isLoading && logs.length === 0 && (
+          <div className="px-6 py-4 text-center">
+            No results to show, try to change the filters or create a new kiosk.
+          </div>
+        )
+      }
+      {
         !isLoading && logs.map(log => (
           <div key={log.id} className="block p-4 bg-white rounded-lg border border-gray-200 shadow-sm hover:bg-gray-100 mb-3">
             <h5 className="text-md font-bold tracking-tight">Log #{log.id}</h5>
