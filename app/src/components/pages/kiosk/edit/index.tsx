@@ -3,7 +3,7 @@ import { ReactElement, useCallback, useState, useEffect } from 'react';
 import { useParams, useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import { repository } from 'lib/repositories/kiosk';
-import { Form, FormFields } from '../partials/form/Form';
+import { Form, FormFields } from '../partials/form'
 import { Kiosk } from 'lib/types';
 
 export const Edit = (): ReactElement => {

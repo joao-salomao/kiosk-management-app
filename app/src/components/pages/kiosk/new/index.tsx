@@ -2,7 +2,7 @@
 import { ReactElement, useCallback, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
-import { Form, FormFields } from '../partials/form/Form';
+import { Form, FormFields } from '../partials/form'
 import { Kiosk } from 'lib/types';
 import { repository } from 'lib/repositories/kiosk';
 

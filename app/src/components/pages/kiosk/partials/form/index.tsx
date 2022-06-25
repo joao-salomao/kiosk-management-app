@@ -23,9 +23,10 @@ export const Form = ({ title = "", formData = {}, isSubmitting, onSubmit }: Form
         <p className="text-lg font-medium text-gray-900 mb-2">{title}</p>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-6">
-            <label htmlFor="serialKey" className="block mb-2 text-sm font-medium text-gray-900">Serial Key:</label>
+            <label id="serialKeyLabel" htmlFor="serialKey" className="block mb-2 text-sm font-medium text-gray-900">Serial Key:</label>
             <input
               type="text"
+              aria-labelledby="serialKeyLabel"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               placeholder="Ex: 123-NZD-123"
               {...register("serialKey", { required: true })}
@@ -34,10 +35,11 @@ export const Form = ({ title = "", formData = {}, isSubmitting, onSubmit }: Form
           </div>
 
           <div className="mb-6">
-            <label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900">Description:</label>
+            <label id="descriptionLabel" htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900">Description:</label>
             <textarea
               rows={2}
               cols={33}
+              aria-labelledby="descriptionLabel"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               {...register("description", { required: true })}
             />
@@ -45,9 +47,9 @@ export const Form = ({ title = "", formData = {}, isSubmitting, onSubmit }: Form
           </div>
 
           <div className="mb-6">
-            <label htmlFor="isKioskClosed" className="block text-sm font-medium text-gray-900 mb-2">Is closed?</label>
+            <label id="isKioskClosedLabel" htmlFor="isKioskClosed" className="block text-sm font-medium text-gray-900 mb-2">Is closed?</label>
             <label className="inline-flex relative items-center cursor-pointer">
-              <input type="checkbox" className="sr-only peer" {...register("isKioskClosed")} />
+              <input aria-labelledby="isKioskClosedLabel" type="checkbox" className="sr-only peer" {...register("isKioskClosed")} />
               <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
             </label>
           </div>
@@ -55,17 +57,19 @@ export const Form = ({ title = "", formData = {}, isSubmitting, onSubmit }: Form
           <div className="mb-6">
             <div className="flex">
               <div className="mr-4">
-                <label htmlFor="storeOpensAt" className="block mb-2 text-sm font-medium text-gray-900">Store opens at:</label>
+                <label id="storeOpensAtLabel" htmlFor="storeOpensAt" className="block mb-2 text-sm font-medium text-gray-900">Store opens at:</label>
                 <input
                   type="time"
+                  aria-labelledby="storeOpensAtLabel"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                   {...register("storeOpensAt", { required: true })}
                 />
               </div>
               <div>
-                <label htmlFor="storeClosesAt" className="block mb-2 text-sm font-medium text-gray-900">Store closes at:</label>
+                <label id="storeClosesAtLabel" htmlFor="storeClosesAt" className="block mb-2 text-sm font-medium text-gray-900">Store closes at:</label>
                 <input
                   type="time"
+                  aria-labelledby="storeClosesAtLabel"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                   {...register("storeClosesAt", { required: true })}
                 />
@@ -77,6 +81,7 @@ export const Form = ({ title = "", formData = {}, isSubmitting, onSubmit }: Form
 
           <button
             type="submit"
+            disabled={isSubmitting}
             className="float-right text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 focus:outline-none h-10 mt-auto"
           >
             {isSubmitting ? 'Saving' : 'Save'}

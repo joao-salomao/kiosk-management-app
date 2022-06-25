@@ -14,16 +14,15 @@ export const Logs = (): ReactElement => {
   const fetchLogs = useCallback(async () => {
     setIsLoading(true);
 
-    const data = await repository.all();
+    const logs = await repository.all();
 
     setIsLoading(false);
-    setLogs(data);
+    setLogs(logs);
   }, [setLogs]);
 
   useMountEffect(() => {
     fetchLogs();
   });
-
 
   return (
     <List isLoading={isLoading} logs={filteredKioskList} />
