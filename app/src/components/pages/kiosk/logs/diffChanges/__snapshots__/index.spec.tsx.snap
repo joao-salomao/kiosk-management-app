@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div>
+  <p
+    className="font-bold"
+  >
+    Changes:
+  </p>
+  <div>
+    <span
+      className="underline"
+    >
+      #name
+    </span>
+     from "
+    Old name
+    " to "
+    New name
+    "
+  </div>
+  <div>
+    <span
+      className="underline"
+    >
+      #age
+    </span>
+     from "
+    30
+    " to "
+    31
+    "
+  </div>
+  <div>
+    <span
+      className="underline"
+    >
+      #likesBeer
+    </span>
+     from "
+    No
+    " to "
+    Yes
+    "
+  </div>
+</div>
+`;
