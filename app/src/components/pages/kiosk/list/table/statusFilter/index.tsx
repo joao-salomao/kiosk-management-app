@@ -2,12 +2,12 @@ import { ReactElement } from "react";
 import {
   useRecoilState
 } from 'recoil';
-import { statusFilterState } from "lib/states/statusFilter";
+import { kioskStatusFilterState } from "lib/states/kioskStatusFilter";
 import { StatusFilterEnum } from "lib/types";
 
 
 export const StatusFilter = (): ReactElement => {
-  const [value, setFilter] = useRecoilState(statusFilterState);
+  const [value, setFilter] = useRecoilState(kioskStatusFilterState);
 
   return (
     <div>

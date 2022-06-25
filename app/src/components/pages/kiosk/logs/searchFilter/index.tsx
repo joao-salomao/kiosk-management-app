@@ -2,11 +2,11 @@ import { ReactElement } from "react";
 import {
   useRecoilState
 } from 'recoil';
-import { kioskSearchFilterState } from "lib/states/kioskSearchFilter";
+import { logsSearchFilter } from "lib/states/logsSearchFilter";
 import { SearchInput } from "components/searchInput";
 
 export const SearchFilter = (): ReactElement => {
-  const [search, setSearch] = useRecoilState(kioskSearchFilterState);
+  const [search, setSearch] = useRecoilState(logsSearchFilter);
 
   return (
     <div className="mr-4">

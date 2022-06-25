@@ -9,7 +9,7 @@ import {
 } from 'recoil';
 import { repository } from "lib/repositories/kiosk";
 import { Table, TableProps } from './table'
-import { filteredKioskListState, kioskListState } from 'lib/states/kioskList.ts';
+import { filteredKioskListState, kioskListState } from 'lib/states/kioskList';
 import { useMountEffect } from '@react-hookz/web';
 
 export const List = (): ReactElement => {

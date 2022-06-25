@@ -10,7 +10,7 @@ export const DiffChanges = ({ log }: { log: Log }): ReactElement => {
 
   return (
     <div>
-      <p className="font-medium font-bold">Changes:</p>
+      <p className="font-bold">Changes:</p>
       {
         keys.map((key) => (
           <div key={key}>

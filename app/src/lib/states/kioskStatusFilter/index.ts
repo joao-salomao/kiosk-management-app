@@ -1,7 +1,7 @@
 import { atom } from "recoil";
 import { StatusFilterEnum } from "lib/types";
 
-export const statusFilterState = atom({
-  key: "statusFilter",
+export const kioskStatusFilterState = atom({
+  key: "kioskStatusFilter",
   default: StatusFilterEnum.all,
 });

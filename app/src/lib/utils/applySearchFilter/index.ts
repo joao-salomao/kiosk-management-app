@@ -1,14 +1,18 @@
-import { Kiosk } from "lib/types";
-
-export const applySearchFilter = (kiosks: Kiosk[], search: string): Kiosk[] => {
+export const applySearchFilter = (
+  list: any[],
+  keys: string[],
+  search: string
+): any[] => {
   const parsedSearch = search.trim();
 
-  if (parsedSearch.length === 0) return kiosks;
+  if (parsedSearch.length === 0) return list;
 
-  return kiosks.filter(
-    (k) =>
-      k.id.includes(parsedSearch) ||
-      k.description.includes(parsedSearch) ||
-      k.serialKey.includes(parsedSearch)
+  if (keys.length === 0) return list;
+
+  return list.filter((item) =>
+    keys.some((key) => {
+      if (!item[key]) return true;
+      return item[key].toString().includes(parsedSearch);
+    })
   );
 };
