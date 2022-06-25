@@ -1,5 +1,6 @@
 import renderer from 'react-test-renderer';
 import { fireEvent, screen, render } from '@testing-library/react';
+import { RecoilRoot } from 'recoil';
 import { Table } from ".";
 
 it('renders the kiosk list correctly', () => {
@@ -24,14 +25,16 @@ it('renders the kiosk list correctly', () => {
 
   const tree = renderer
     .create(
-      <Table
-        kiosks={kiosks}
-        isLoading={false}
-        onClickNew={jest.fn()}
-        onClickEdit={jest.fn()}
-        onClickLogs={jest.fn()}
-        onClickDelete={jest.fn()}
-      />
+      <RecoilRoot>
+        <Table
+          kiosks={kiosks}
+          isLoading={false}
+          onClickNew={jest.fn()}
+          onClickEdit={jest.fn()}
+          onClickLogs={jest.fn()}
+          onClickDelete={jest.fn()}
+        />
+      </RecoilRoot>
     )
     .toJSON();
 
@@ -43,14 +46,16 @@ it('renders loader correctly', () => {
 
   const tree = renderer
     .create(
-      <Table
-        kiosks={[]}
-        isLoading={true}
-        onClickNew={jest.fn()}
-        onClickEdit={jest.fn()}
-        onClickLogs={jest.fn()}
-        onClickDelete={jest.fn()}
-      />
+      <RecoilRoot>
+        <Table
+          kiosks={[]}
+          isLoading={true}
+          onClickNew={jest.fn()}
+          onClickEdit={jest.fn()}
+          onClickLogs={jest.fn()}
+          onClickDelete={jest.fn()}
+        />
+      </RecoilRoot>
     )
     .toJSON();
 
@@ -61,15 +66,17 @@ it('call the handler on click the "New Kiosk" button', () => {
   const onClickNewMock = jest.fn();
 
   render(
-    <Table
-      kiosks={[]}
-      isLoading={false}
+    <RecoilRoot>
+      <Table
+        kiosks={[]}
+        isLoading={false}
 
-      onClickNew={onClickNewMock}
-      onClickEdit={jest.fn()}
-      onClickLogs={jest.fn()}
-      onClickDelete={jest.fn()}
-    />
+        onClickNew={onClickNewMock}
+        onClickEdit={jest.fn()}
+        onClickLogs={jest.fn()}
+        onClickDelete={jest.fn()}
+      />
+    </RecoilRoot>
   );
 
   const button = screen.getByText(/new kiosk/i);
@@ -93,14 +100,16 @@ it('call the handler on click the "Delete" button', () => {
   ]
 
   render(
-    <Table
-      kiosks={kiosks}
-      isLoading={false}
-      onClickNew={jest.fn()}
-      onClickEdit={jest.fn()}
-      onClickLogs={jest.fn()}
-      onClickDelete={onClickDeleteMock}
-    />
+    <RecoilRoot>
+      <Table
+        kiosks={kiosks}
+        isLoading={false}
+        onClickNew={jest.fn()}
+        onClickEdit={jest.fn()}
+        onClickLogs={jest.fn()}
+        onClickDelete={onClickDeleteMock}
+      />
+    </RecoilRoot>
   );
 
   const button = screen.getByText(/delete/i);
@@ -122,14 +131,16 @@ it('call the handler on click the "Edit" button', () => {
   }
 
   render(
-    <Table
-      kiosks={[kiosk]}
-      isLoading={false}
-      onClickNew={jest.fn()}
-      onClickLogs={jest.fn()}
-      onClickDelete={jest.fn()}
-      onClickEdit={onClickEditMock}
-    />
+    <RecoilRoot>
+      <Table
+        kiosks={[kiosk]}
+        isLoading={false}
+        onClickNew={jest.fn()}
+        onClickLogs={jest.fn()}
+        onClickDelete={jest.fn()}
+        onClickEdit={onClickEditMock}
+      />
+    </RecoilRoot>
   );
 
   const button = screen.getByText(/edit/i);
