@@ -141,8 +141,8 @@ export class KioskController {
       const newValue = newData[key];
 
       if (newValue !== oldValue) {
-        diffObject[key]["from"] = oldValue;
-        diffObject[key]["to"] = newValue;
+        diffObject["from"][key] = oldValue;
+        diffObject["to"][key] = newValue;
       }
     });
 
