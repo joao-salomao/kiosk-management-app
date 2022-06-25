@@ -3,7 +3,7 @@ export const applySearchFilter = (
   keys: string[],
   search: string
 ): any[] => {
-  const parsedSearch = search.trim();
+  const parsedSearch = search.trim().toLowerCase();
 
   if (parsedSearch.length === 0) return list;
 
@@ -12,7 +12,7 @@ export const applySearchFilter = (
   return list.filter((item) =>
     keys.some((key) => {
       if (!item[key]) return true;
-      return item[key].toString().includes(parsedSearch);
+      return item[key].toString().toLowerCase().includes(parsedSearch);
     })
   );
 };
