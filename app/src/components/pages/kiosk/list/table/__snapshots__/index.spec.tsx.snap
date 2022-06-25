@@ -17,6 +17,7 @@ exports[`renders loader correctly 1`] = `
     >
       <label
         htmlFor="searchFilter"
+        id="search-label"
       >
         Search
       </label>
@@ -41,6 +42,7 @@ exports[`renders loader correctly 1`] = `
           </svg>
         </div>
         <input
+          aria-labelledby="search-label"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2"
           name="searchFilter"
           onChange={[Function]}
@@ -191,6 +193,7 @@ exports[`renders the kiosk list correctly 1`] = `
     >
       <label
         htmlFor="searchFilter"
+        id="search-label"
       >
         Search
       </label>
@@ -215,6 +218,7 @@ exports[`renders the kiosk list correctly 1`] = `
           </svg>
         </div>
         <input
+          aria-labelledby="search-label"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2"
           name="searchFilter"
           onChange={[Function]}
