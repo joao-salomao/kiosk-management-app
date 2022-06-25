@@ -17,7 +17,7 @@ export const filteredKioskListState = selector({
     const search = get(kioskSearchFilterState);
     const list = get(kioskListState);
 
-    let filteredList = applyStatusFilter(list, statusFilter);
+    const filteredList = applyStatusFilter(list, statusFilter);
     return applySearchFilter(
       filteredList,
       ["id", "description", "serialKey"],
