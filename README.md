@@ -6,7 +6,7 @@
   docker-compose up -d
   ````
 - Wait until the services start up.
-- Access the URL http://localhost:3000 in your browser to use the App interface or the URL http://localhost:3001 to the API.
+- Access the URL http://localhost:3000 on your browser to use the App interface or the URL http://localhost:3001 to the API.
 
 
 ### Running app locally
@@ -42,3 +42,4 @@
   ```
   npm start
   ````
+- Access the URL http://localhost:3000 on your browser to use the App interface or the URL http://localhost:3001 to the API.
