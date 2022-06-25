@@ -20,10 +20,10 @@ export const Edit = (): ReactElement => {
 
       await repository.update(params.kioskId as string, fields as Kiosk);
 
-      toast.success("Kiosk successfully updated!", { type: 'success' });
+      toast.success("Kiosk successfully updated!");
       navigate("/");
     } catch (e) {
-      toast.success("Something goes wrong, try again.", { type: 'error' });
+      toast.error("Something goes wrong, try again.");
       console.error(e);
     } finally {
       setIsSubmitting(false);

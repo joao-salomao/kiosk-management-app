@@ -11,14 +11,19 @@ export const New = (): ReactElement => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const onSubmit = useCallback(async (fields: FormFields) => {
-    setIsSubmitting(true);
+    try {
+      setIsSubmitting(true);
 
-    await repository.create(fields as Kiosk);
+      await repository.create(fields as Kiosk);
 
-    setIsSubmitting(false);
-    toast.success("Kiosk successfully created!", { type: 'success' });
-    navigate("/");
-
+      toast.success("Kiosk successfully created!");
+      navigate("/");
+    } catch (e) {
+      console.error(e);
+      toast.error("Something goes wrong, try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   }, [navigate]);
 
   return <div>
