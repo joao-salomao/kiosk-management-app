@@ -3,6 +3,7 @@ import { Kiosk } from "lib/types";
 import { formatTime } from "lib/utils/formatTime";
 import { StatusFilter } from "./statusFilter";
 import { SearchFilter } from "./searchFilter";
+import { Spinner } from "components/spinner";
 
 export type TableProps = {
   kiosks: Kiosk[];
@@ -25,6 +26,7 @@ export const Table = (
 ): ReactElement => {
   return (
     <div className="overflow-x-auto shadow-lg sm:rounded-lg p-2">
+      <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-700">Kiosks</h5>
       <div className="flex mb-2">
         <SearchFilter />
         <StatusFilter />
@@ -65,8 +67,10 @@ export const Table = (
         <tbody>
           {isLoading && (
             <tr className="bg-white border-b">
-              <th colSpan={7} scope="row" className="px-6 py-4 text-center">
-                Carregando
+              <th colSpan={7} scope="row" className="px-6 py-4">
+                <div className="h-10 w-10 mx-auto">
+                  <Spinner />
+                </div>
               </th>
             </tr>
           )}
@@ -74,7 +78,7 @@ export const Table = (
             kiosks.map((item) => (
               <tr
                 key={item.id}
-                className="bg-white border-b"
+                className="bg-white border-b hover:bg-gray-100"
               >
                 <th scope="row" className="px-6 py-4">
                   {`#${item.id}`}
