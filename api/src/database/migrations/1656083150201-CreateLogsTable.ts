@@ -49,7 +49,6 @@ export class CreateLogsTable1656083150201 implements MigrationInterface {
         columnNames: ["kioskId"],
         referencedColumnNames: ["id"],
         referencedTableName: "kiosks",
-        onDelete: "CASCADE",
       })
     );
 
@@ -59,7 +58,6 @@ export class CreateLogsTable1656083150201 implements MigrationInterface {
         columnNames: ["userId"],
         referencedColumnNames: ["id"],
         referencedTableName: "users",
-        onDelete: "CASCADE",
       })
     );
   }

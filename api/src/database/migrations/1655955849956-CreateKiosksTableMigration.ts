@@ -1,13 +1,6 @@
-import {
-  MigrationInterface,
-  QueryRunner,
-  Table,
-  TableIndex,
-  TableColumn,
-  TableForeignKey,
-} from "typeorm";
+import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
-export class CreateUserTableMigration1655955849956
+export class CreateKiosksTableMigration1655955849956
   implements MigrationInterface
 {
   public async up(queryRunner: QueryRunner): Promise<void> {
@@ -47,6 +40,11 @@ export class CreateUserTableMigration1655955849956
             name: "storeClosesAt",
             type: "time",
             isNullable: false,
+          },
+          {
+            name: "deletedAt",
+            type: "timestamp",
+            isNullable: true,
           },
         ],
       }),

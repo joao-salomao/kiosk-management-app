@@ -1,4 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToMany,
+  DeleteDateColumn,
+} from "typeorm";
 import { Transform } from "class-transformer";
 import { Log } from "./Log";
 
@@ -22,6 +28,9 @@ export class Kiosk {
 
   @Column({ type: "time" })
   storeClosesAt: string;
+
+  @DeleteDateColumn()
+  deletedAt: Date;
 
   @OneToMany(() => Log, (log) => log.kiosk)
   logs: Log[];

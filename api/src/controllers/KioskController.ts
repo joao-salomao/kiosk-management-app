@@ -43,6 +43,7 @@ export class KioskController {
   async allLogs() {
     return this.logRepository.find({
       relations: ["user", "kiosk"],
+      withDeleted: true,
     });
   }
 
@@ -53,6 +54,7 @@ export class KioskController {
         kioskId: id,
       },
       relations: ["user", "kiosk"],
+      withDeleted: true,
     });
   }
 
@@ -61,7 +63,7 @@ export class KioskController {
     const kiosk = this.kioskRepository.create(kioskData);
 
     await this.kioskRepository.save(kiosk);
-    await this.createActionLog(kiosk, "create kiosk", kiosk, kioskData);
+    await this.createActionLog(kiosk, "Create kiosk", kiosk, kioskData);
 
     return { status: "success", message: "Kiosk created" };
   }
@@ -75,7 +77,7 @@ export class KioskController {
     });
 
     await this.kioskRepository.update(kiosk.id, kioskData);
-    await this.createActionLog(kiosk, "update kiosk", kiosk, kioskData);
+    await this.createActionLog(kiosk, "Update kiosk", kiosk, kioskData);
 
     return { status: "success", message: "Kiosk updated" };
   }
@@ -84,8 +86,8 @@ export class KioskController {
   async remove(@Param("id") id: number) {
     const kiosk = await this.findKiosk(id);
 
-    await this.kioskRepository.delete(id);
-    await this.createActionLog(kiosk, "delete kiosk");
+    await this.kioskRepository.softDelete(id);
+    await this.createActionLog(kiosk, "Delete kiosk");
 
     return { status: "success", message: "Kiosk updated" };
   }
@@ -101,8 +103,8 @@ export class KioskController {
   private async createActionLog(
     kiosk: Kiosk,
     action: string,
-    oldData?: Omit<Kiosk, "id">,
-    newData?: Omit<Kiosk, "id">
+    oldData?: Partial<Omit<Kiosk, "id">>,
+    newData?: Partial<Omit<Kiosk, "id">>
   ) {
     const defaultUser = await this.getDefaultUser();
 
@@ -110,8 +112,7 @@ export class KioskController {
       kiosk,
       action,
       user: defaultUser,
-      description:
-        oldData && newData ? this.prepareDiffJson(oldData, newData) : "",
+      description: this.prepareDiffJson(oldData || {}, newData || {}),
     });
   }
 
@@ -124,12 +125,12 @@ export class KioskController {
   }
 
   private prepareDiffJson(
-    oldData: Omit<Kiosk, "id">,
-    newData: Omit<Kiosk, "id">
+    oldData: Partial<Omit<Kiosk, "id">>,
+    newData: Partial<Omit<Kiosk, "id">>
   ): string {
     const uniqueKeys = [
       ...new Set([...Object.keys(oldData), ...Object.keys(newData)]),
-    ].filter((key) => key !== "id");
+    ].filter((key) => !["id", "deletedAt"].includes(key));
 
     const diffObject: Record<string, any> = {
       from: {},
