@@ -28,9 +28,6 @@ export const Edit = (): ReactElement => {
     } finally {
       setIsSubmitting(false);
     }
-
-
-
   }, [params.kioskId, navigate]);
 
 
