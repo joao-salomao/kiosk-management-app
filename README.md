@@ -30,7 +30,7 @@
 
 - Setup the database structure running the following command on the API root folder:
   ```
-  npm install db:migrate
+  npm run db:migrate
   ```
 
 - Start up the API running the following command on the API root folder:
